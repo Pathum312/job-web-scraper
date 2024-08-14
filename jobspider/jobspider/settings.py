@@ -1,4 +1,4 @@
-# Scrapy settings for jobcrawling project
+# Scrapy settings for jobspider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "jobcrawling"
+BOT_NAME = "jobspider"
 
-SPIDER_MODULES = ["jobcrawling.spiders"]
-NEWSPIDER_MODULE = "jobcrawling.spiders"
+SPIDER_MODULES = ["jobspider.spiders"]
+NEWSPIDER_MODULE = "jobspider.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "jobcrawling (+http://www.yourdomain.com)"
+#USER_AGENT = "jobspider (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,15 +45,14 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "jobcrawling.middlewares.JobcrawlingSpiderMiddleware": 543,
+#    "jobspider.middlewares.JobspiderSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES: dict[str, int] = {
-    "scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware": 1,
-    "jobcrawling.middlewares.JobcrawlingDownloaderMiddleware": 543,
-}
+#DOWNLOADER_MIDDLEWARES = {
+#    "jobspider.middlewares.JobspiderDownloaderMiddleware": 543,
+#}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -64,7 +63,7 @@ DOWNLOADER_MIDDLEWARES: dict[str, int] = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    "jobcrawling.pipelines.JobcrawlingPipeline": 300,
+#    "jobspider.pipelines.JobspiderPipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

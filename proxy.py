@@ -54,6 +54,7 @@ def check_proxies() -> None:
             )
             
             if res.status_code == 200:
+                print(res.text)
                 with open(file=verified_file_path, mode='a') as f:
                     print(f'{proxy} Working! :)\n')
                     if not proxy == '':  
