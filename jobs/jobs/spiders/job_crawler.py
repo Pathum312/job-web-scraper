@@ -14,19 +14,16 @@ class JobCrawlerSpider(CrawlSpider):
     )
     
     def parse_item(self, response: HtmlResponse) -> Generator[dict[str, str | None], Any, None]:
-        """
-            title - /html/body/div/div/div[2]/div[2]/article/div[1]/div[2]/h1
-            price - /html/body/div/div/div[2]/div[2]/article/div[1]/div[2]/p[1]
-            stock - /html/body/div/div/div[2]/div[2]/article/div[1]/div[2]/p[2]
-            description - /html/body/div/div/div[2]/div[2]/article/p
-        """
         yield {
-            "title": response.xpath(query='/html/body/div/div/div[2]/div[2]/article/div[1]/div[2]/h1/text()').get(), # type: ignore
-            "price": response.xpath(query='/html/body/div/div/div[2]/div[2]/article/div[1]/div[2]/p[1]/text()').get(), # type: ignore
-            "stock": response.xpath(query='/html/body/div/div/div[2]/div[2]/article/div[1]/div[2]/p[2]/text()').getall()[1] # type: ignore
+            "upc": response.css(query='td::text').getall()[0], # type: ignore
+            "title": response.css(query='h1::text').get(), # type: ignore
+            "type": response.css(query='a::text').getall()[3], # type: ignore
+            "price": response.css(query='p.price_color::text').get().replace('£', ''), # type: ignore
+            "tax": response.css(query='td::text').getall()[4].replace('£', ''), # type: ignore
+            "stock": response.css(query='p.availability::text').getall()[1] # type: ignore
             .replace('\n', '')
             .replace(' ', '')
             .replace('Instock(', '')
             .replace('available)', ''),
-            "description": response.xpath(query='/html/body/div/div/div[2]/div[2]/article/p/text()').get(), # type: ignore
+            "description": response.css(query='p::text').getall()[10], # type: ignore
         }
