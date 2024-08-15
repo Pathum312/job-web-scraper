@@ -1,4 +1,4 @@
-# Scrapy settings for jobspider project
+# Scrapy settings for jobs project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,17 +7,17 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "jobspider"
+BOT_NAME = "jobs"
 
-SPIDER_MODULES = ["jobspider.spiders"]
-NEWSPIDER_MODULE = "jobspider.spiders"
+SPIDER_MODULES = ["jobs.spiders"]
+NEWSPIDER_MODULE = "jobs.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "jobspider (+http://www.yourdomain.com)"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "jobspider.middlewares.JobspiderSpiderMiddleware": 543,
+#    "jobs.middlewares.JobsSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "jobspider.middlewares.JobspiderDownloaderMiddleware": 543,
+#    "jobs.middlewares.JobsDownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    "jobspider.pipelines.JobspiderPipeline": 300,
+#    "jobs.pipelines.JobsPipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
