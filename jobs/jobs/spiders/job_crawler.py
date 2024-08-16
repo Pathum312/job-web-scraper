@@ -1,4 +1,6 @@
+from ..items import JobsItem
 from typing import Any, Generator
+from scrapy.loader import ItemLoader # type: ignore
 from scrapy.spiders import Rule, CrawlSpider # type: ignore
 from scrapy.linkextractors import LinkExtractor # type: ignore
 from scrapy.http.response.html import HtmlResponse # type: ignore
@@ -14,16 +16,14 @@ class JobCrawlerSpider(CrawlSpider):
     )
     
     def parse_item(self, response: HtmlResponse) -> Generator[dict[str, str | None], Any, None]:
-        yield {
-            "upc": response.css(query='td::text').getall()[0], # type: ignore
-            "title": response.css(query='h1::text').get(), # type: ignore
-            "type": response.css(query='a::text').getall()[3], # type: ignore
-            "price": response.css(query='p.price_color::text').get().replace('£', ''), # type: ignore
-            "tax": response.css(query='td::text').getall()[4].replace('£', ''), # type: ignore
-            "stock": response.css(query='p.availability::text').getall()[1] # type: ignore
-            .replace('\n', '')
-            .replace(' ', '')
-            .replace('Instock(', '')
-            .replace('available)', ''),
-            "description": response.css(query='p::text').getall()[10], # type: ignore
-        }
+        l: ItemLoader = ItemLoader(item=JobsItem(), response=response)
+        
+        l.add_css(field_name='upc', css='tr:first-child td')
+        l.add_css(field_name='title', css='h1')
+        l.add_css(field_name='category', css='li:nth-child(3) a')
+        l.add_css(field_name='price', css='p.price_color')
+        l.add_css(field_name='tax', css='tr:nth-child(5) td')
+        l.add_css(field_name='stock', css='p.availability')
+        l.add_css(field_name='description', css='.product_page > p:nth-child(3)')
+        
+        return l.load_item()
